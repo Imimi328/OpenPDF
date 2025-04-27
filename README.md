@@ -8,6 +8,7 @@
 <div align="center">
         <b>A lightweight, fast, and modern PDF viewer/Editor built with Python and PyQt5</b>
 </div>
+<hr>
 <div class="container">
         <p>Download the latest version of OpenPDF.</p>
 
