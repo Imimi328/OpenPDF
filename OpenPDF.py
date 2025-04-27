@@ -1011,7 +1011,7 @@ class PDFAnnotator(QMainWindow):
         self.status.showMessage(status)
 
     def show_about(self):
-        QtWidgets.QMessageBox.about(self, "About", "Enhanced PDF Annotator\nVersion 1.0")
+        QtWidgets.QMessageBox.about(self, "About", "OpenPDF\nVersion 3.2.8\nBy Team Emogi")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
