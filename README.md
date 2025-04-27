@@ -20,7 +20,6 @@
         <li>⚡ Fast and optimized performance</li>
         <li>🔓 100% Open-source and free to use</li>
         <li>🛠️ Over <b>1000+ lines of structured, maintainable code</b></li>
-        <li>🎨 Custom branding with a unique app icon</li>
         <li>🧬 Future updates with more features and enhancements planned!</li>
 </ul>
 
