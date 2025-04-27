@@ -2,6 +2,7 @@
 import sys, os, json
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QAction, QApplication, QMainWindow, QFileDialog, QColorDialog, QInputDialog, QGraphicsView, QGraphicsScene, QOpenGLWidget, QToolButton, QButtonGroup, QGraphicsPathItem, QGraphicsLineItem, QGraphicsRectItem, QGraphicsEllipseItem, QGraphicsTextItem, QToolBar, QStatusBar, QSlider, QDockWidget, QListWidget, QComboBox, QVBoxLayout, QWidget, QProgressDialog
+from PyQt5.QtCore import QPropertyAnimation, QEasingCurve
 import fitz  # PyMuPDF
 
 AUTOSAVE_INTERVAL = 60_000  # ms
@@ -91,11 +92,25 @@ class ThumbnailWidget(QListWidget):
         self.setViewMode(QListWidget.IconMode)
         self.setIconSize(QtCore.QSize(100, 140))
         self.setResizeMode(QListWidget.Adjust)
-        self.setSpacing(10)
+        self.setSpacing(12)
         self.setStyleSheet("""
-            QListWidget { background: #2a2a2a; border: none; }
-            QListWidget::item { padding: 5px; }
-            QListWidget::item:selected { background: #3a3a3a; }
+            QListWidget { 
+                background: #252535; 
+                border: none; 
+                color: #e0e0e0;
+                font-family: 'Segoe UI', sans-serif;
+            }
+            QListWidget::item { 
+                padding: 8px; 
+                border-radius: 6px;
+            }
+            QListWidget::item:hover { 
+                background: #353545;
+            }
+            QListWidget::item:selected { 
+                background: #26a69a;
+                color: #ffffff;
+            }
         """)
 
 class AnnotatorView(QGraphicsView):
@@ -108,6 +123,19 @@ class AnnotatorView(QGraphicsView):
         self.setViewportUpdateMode(QGraphicsView.FullViewportUpdate)
         self.setDragMode(QGraphicsView.NoDrag)
         self.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)
+
+    def tabletEvent(self, event):
+        if event.type() == QtCore.QEvent.TabletPress:
+            print(f"Tablet Press: Pressure={event.pressure()}, Pos={event.pos()}")
+            self.parent._start_tool(event)
+        elif event.type() == QtCore.QEvent.TabletMove:
+            if self.parent.drawing:
+                print(f"Tablet Move: Pressure={event.pressure()}, Pos={event.pos()}")
+                self.parent._move_tool(event)
+        elif event.type() == QtCore.QEvent.TabletRelease:
+            print(f"Tablet Release: Pos={event.pos()}")
+            self.parent._end_tool(event)
+        event.accept()
 
     def mousePressEvent(self, ev):
         if self.parent.current_tool == "pan":
@@ -190,81 +218,103 @@ class PDFAnnotator(QMainWindow):
 
     def _apply_modern_theme(self):
         self.setStyleSheet("""
-            QMainWindow { background: #252525; }
+            QMainWindow { 
+                background: #1e1e2e; 
+                color: #e0e0e0;
+            }
             QToolBar { 
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                    stop:0 #3a3a3a, stop:1 #2a2a2a);
+                    stop:0 #2c2c3c, stop:1 #252535);
                 border: none;
-                padding: 4px;
+                padding: 8px;
+                spacing: 4px;
             }
             QToolButton { 
-                background: #353535;
-                border: 1px solid #454545;
-                border-radius: 6px;
-                padding: 6px;
-                margin: 2px;
-                color: white;
+                background: #353545;
+                border: 1px solid #454555;
+                border-radius: 8px;
+                padding: 8px;
+                margin: 4px;
+                color: #e0e0e0;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 12px;
             }
             QToolButton:checked { 
-                background: #505050;
-                border: 1px solid #606060;
+                background: #26a69a;
+                border: 1px solid #2cb7a8;
+                color: #ffffff;
             }
             QToolButton:hover { 
-                background: #454545;
+                background: #454555;
+                border: 1px solid #555565;
             }
             QMenuBar, QMenu { 
-                background: #2a2a2a;
-                color: white;
-                border: none;
+                background: #252535;
+                color: #e0e0e0;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 12px;
             }
             QMenu::item:selected { 
-                background: #3a3a3a;
+                background: #353545;
             }
             QStatusBar { 
-                background: #2a2a2a;
-                color: white;
-                border-top: 1px solid #353535;
+                background: #252535;
+                color: #e0e0e0;
+                border-top: 1px solid #353545;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 12px;
             }
             QDockWidget { 
-                background: #2a2a2a;
-                color: white;
-                border: 1px solid #353535;
+                background: #252535;
+                color: #e0e0e0;
+                border: 1px solid #353545;
+            }
+            QDockWidget::title {
+                background: #2c2c3c;
+                padding: 4px;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 12px;
             }
             QSlider::groove:horizontal {
-                background: #353535;
-                height: 8px;
-                border-radius: 4px;
+                background: #353545;
+                height: 10px;
+                border-radius: 5px;
             }
             QSlider::handle:horizontal {
-                background: #606060;
-                width: 16px;
-                border-radius: 8px;
+                background: #26a69a;
+                width: 18px;
+                border-radius: 9px;
                 margin: -4px 0;
             }
+            QSlider::handle:horizontal:hover {
+                background: #2cb7a8;
+            }
             QComboBox {
-                background: #353535;
-                color: white;
-                border: 1px solid #454545;
-                border-radius: 4px;
-                padding: 4px;
+                background: #353545;
+                color: #e0e0e0;
+                border: 1px solid #454555;
+                border-radius: 6px;
+                padding: 6px;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 12px;
             }
             QComboBox::drop-down {
                 border: none;
-                width: 20px;
+                width: 24px;
             }
             QScrollBar:vertical {
-                background: #2a2a2a;
-                width: 12px;
+                background: #252535;
+                width: 14px;
                 margin: 0px;
                 border: none;
             }
             QScrollBar::handle:vertical {
-                background: #505050;
+                background: #454555;
                 min-height: 20px;
-                border-radius: 6px;
+                border-radius: 7px;
             }
             QScrollBar::handle:vertical:hover {
-                background: #606060;
+                background: #555565;
             }
             QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
                 background: none;
@@ -274,18 +324,18 @@ class PDFAnnotator(QMainWindow):
                 background: none;
             }
             QScrollBar:horizontal {
-                background: #2a2a2a;
-                height: 12px;
+                background: #252535;
+                height: 14px;
                 margin: 0px;
                 border: none;
             }
             QScrollBar::handle:horizontal {
-                background: #505050;
+                background: #454555;
                 min-width: 20px;
-                border-radius: 6px;
+                border-radius: 7px;
             }
             QScrollBar::handle:horizontal:hover {
-                background: #606060;
+                background: #555565;
             }
             QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
                 background: none;
@@ -300,6 +350,8 @@ class PDFAnnotator(QMainWindow):
         tb = QToolBar("Tools")
         tb.setIconSize(QtCore.QSize(32, 32))
         tb.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+        tb.setFloatable(True)
+        tb.setMovable(True)
         self.addToolBar(QtCore.Qt.TopToolBarArea, tb)
 
         self.btn_group = QButtonGroup(self)
@@ -311,17 +363,19 @@ class PDFAnnotator(QMainWindow):
             btn.setToolTip(text)
             btn.setStatusTip(text)
             btn.setCheckable(checkable)
+            btn.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
             if tool:
                 btn.clicked.connect(lambda checked, t=tool: self._select_tool(t))
             elif slot:
                 btn.clicked.connect(slot)
+            btn.clicked.connect(lambda: self._animate_button(btn))
             tb.addWidget(btn)
             if checkable:
                 self.btn_group.addButton(btn)
             return btn
 
         add_btn("📂", "Open", checkable=False, slot=self.open_pdf)
-        add_btn("💾", "Save Annotations", checkable=False, slot=self.save_annotations)
+        add_btn("💾", "Save", checkable=False, slot=self.save_annotations)
         tb.addSeparator()
 
         add_btn("🖊️", "Pen", "pen")
@@ -357,6 +411,24 @@ class PDFAnnotator(QMainWindow):
 
         self._select_tool("pen")
 
+    def _animate_button(self, button):
+        anim = QPropertyAnimation(button, b"geometry")
+        original = button.geometry()
+        anim.setStartValue(original)
+        anim.setEndValue(QtCore.QRect(
+            original.x() + 2, original.y() + 2,
+            original.width() - 4, original.height() - 4
+        ))
+        anim.setDuration(100)
+        anim.setEasingCurve(QEasingCurve.InOutQuad)
+        anim2 = QPropertyAnimation(button, b"geometry")
+        anim2.setStartValue(anim.endValue())
+        anim2.setEndValue(original)
+        anim2.setDuration(100)
+        anim2.setEasingCurve(QEasingCurve.InOutQuad)
+        anim.start()
+        anim.finished.connect(anim2.start)
+
     def _setup_dock_widgets(self):
         self.thumbnail_dock = QDockWidget("Pages", self)
         self.thumbnail_list = ThumbnailWidget()
@@ -374,7 +446,7 @@ class PDFAnnotator(QMainWindow):
         layer_layout.addWidget(self.layer_combo)
         
         add_layer_btn = QToolButton()
-        add_layer_btn.setText("➕ Add Layer")
+        add_layer_btn.setText("Add Layer")
         add_layer_btn.clicked.connect(self._add_layer)
         layer_layout.addWidget(add_layer_btn)
         
@@ -722,7 +794,6 @@ class PDFAnnotator(QMainWindow):
                     item = QGraphicsTextItem(text)
                     item.setDefaultTextColor(color)
                     item.setFont(QtGui.QFont("Arial", font_size))
-                    item.setPos(x, y)
                     item.setPos(self.page_items[page_idx].pos() + QtCore.QPointF(x, y))
                     item.setFlag(QtWidgets.QGraphicsItem.ItemIsMovable)
                     item.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable)
