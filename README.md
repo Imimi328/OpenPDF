@@ -14,7 +14,7 @@
 <h2>✨ Features</h2>
 
 <ul>
-        <li>📄 Open and view PDF documents effortlessly</li>
+        <li>📄 Open, view, edit, write and draw on any PDF document effortlessly</li>
         <li>🌙 Built-in <b>Dark Mode</b> for comfortable reading</li>
         <li>🖥️ Clean and minimalistic user interface</li>
         <li>⚡ Fast and optimized performance</li>
