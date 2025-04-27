@@ -1,7 +1,7 @@
 <html>
 <body>
     <div align="center">
-        <img src="https://img.shields.io/badge/Open%20Source-%E2%9C%94%EF%B8%8F-brightgreen" alt="Open Source Badge">
+        <img src="https://img.shields.io/badge/Open%20Source-%E2%9C%94%EF%B8%8F-lightblue" alt="Open Source Badge">
     </div>
     <h1 align="center">OpenPDF By Team Emogi</h1>
 
