@@ -20,7 +20,7 @@ OpenPDF is a lightweight, fast, and feature-rich PDF viewer application built us
 
 🚀 Installation
 
-git clone https://github.com/YourUsername/OpenPDF.git
+git clone https://github.com/Imimi328/OpenPDF.git
 cd OpenPDF
 pip install -r requirements.txt
 python App.py
