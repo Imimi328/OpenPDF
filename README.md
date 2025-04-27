@@ -6,7 +6,14 @@
     <h1 align="center">OpenPDF By Team Emogi</h1>
 
 <div align="center">
-        <b>A lightweight, fast, and modern PDF viewer built with Python and PyQt5</b>
+        <b>A lightweight, fast, and modern PDF viewer/Editor built with Python and PyQt5</b>
+</div>
+<div class="container">
+        <p>Download the latest version of OpenPDF.</p>
+
+        
+<a href="https://imimi328.github.io/OpenPDF/" class="button" target="_blank">Download OpenPDF</a>
+
 </div>
 
 <hr>
