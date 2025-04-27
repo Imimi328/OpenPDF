@@ -42,7 +42,7 @@
 git clone https://github.com/Imimi328/OpenPDF.git
 cd OpenPDF
 pip install -r requirements.txt
-python App.py
+python OpenPDF.py
         </code>
     </pre>
 
