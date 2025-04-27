@@ -16,8 +16,6 @@ OpenPDF is a lightweight, fast, and feature-rich PDF viewer application built us
 
 🛠️ Over 1000+ lines of structured, maintainable code
 
-🎨 Custom branding with a unique app icon
-
 🧬 Future updates with more features and enhancements planned!
 
 🚀 Installation
