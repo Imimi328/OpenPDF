@@ -1,47 +1,73 @@
-OpenPDF By Team Emogi
+<html>
+<head>
+    <title>OpenPDF By Team Emogi</title>
+</head>
+<body>
+    <div align="center">
+        <img src="https://img.shields.io/badge/Open%20Source-%E2%9C%94%EF%B8%8F-brightgreen" alt="Open Source Badge">
+    </div>
 
-OpenPDF is a lightweight, fast, and feature-rich PDF viewer application built using Python and PyQt5.Designed with a sleek dark mode and a clean, modern interface, OpenPDF provides an intuitive PDF reading experience.Developed with over 1000+ lines of code, this project reflects Team Emogi's passion for quality, simplicity, and open-source collaboration.
+    <h1 align="center">OpenPDF By Team Emogi</h1>
 
-✨ Features
+    <div align="center">
+        <b>A lightweight, fast, and modern PDF viewer built with Python and PyQt5</b>
+    </div>
 
-📄 Open and view PDF documents effortlessly
+    <hr>
 
-🌙 Built-in Dark Mode for comfortable reading
+    <h2>✨ Features</h2>
 
-🖥️ Clean and minimalistic user interface
+    <ul>
+        <li>📄 Open and view PDF documents effortlessly</li>
+        <li>🌙 Built-in <b>Dark Mode</b> for comfortable reading</li>
+        <li>🖥️ Clean and minimalistic user interface</li>
+        <li>⚡ Fast and optimized performance</li>
+        <li>🔓 100% Open-source and free to use</li>
+        <li>🛠️ Over <b>1000+ lines of structured, maintainable code</b></li>
+        <li>🎨 Custom branding with a unique app icon</li>
+        <li>🧬 Future updates with more features and enhancements planned!</li>
+    </ul>
 
-⚡ Fast and optimized performance
+    <hr>
 
-🔓 100% Open-source and free to use
+    <h2>🚀 Installation</h2>
 
-🛠️ Over 1000+ lines of structured, maintainable code
+    <p>Clone the repository and run the app:</p>
 
-🧬 Future updates with more features and enhancements planned!
-
-🚀 Installation
-
-git clone https://github.com/Imimi328/OpenPDF.git
+    <pre>
+        <code>
+git clone https://github.com/YourUsername/OpenPDF.git
 cd OpenPDF
 pip install -r requirements.txt
 python App.py
+        </code>
+    </pre>
 
-🤝 Contributing
+    <hr>
 
-We welcome contributions from developers, designers, and open-source enthusiasts!
+    <h2>🤝 Contributing</h2>
 
-Fork the repository
+    <p>We welcome contributions from developers, designers, and open-source enthusiasts!</p>
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+    <ol>
+        <li>Fork the repository</li>
+        <li>Create your feature branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
+        <li>Commit your changes (<code>git commit -m 'Add some AmazingFeature'</code>)</li>
+        <li>Push to the branch (<code>git push origin feature/AmazingFeature</code>)</li>
+        <li>Open a Pull Request</li>
+    </ol>
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+    <hr>
 
-Push to the branch (git push origin feature/AmazingFeature)
+    <h2>📄 License</h2>
 
-Open a Pull Request
+    <p>This project is licensed under the <b>MIT License</b>.</p>
+    <p>See the <a href="LICENSE">LICENSE</a> file for more details.</p>
 
-📄 License
+    <hr>
 
-This project is licensed under the MIT License.
-See the LICENSE file for more details.
-
-Proudly crafted by Team Emogi. Together, we build the future!
+    <div align="center">
+        <i>Proudly crafted by Team Emogi. Together, we build the future!</i>
+    </div>
+</body>
+</html>
