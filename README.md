@@ -1,40 +1,10 @@
 <html>
-<head>
-    <title>OpenPDF By Team Emogi</title>
-</head>
 <body>
     <div align="center">
         <img src="https://img.shields.io/badge/Open%20Source-%E2%9C%94%EF%B8%8F-brightgreen" alt="Open Source Badge">
     </div>
 
-    <h1 align="center">OpenPDF By Team Emogi</h1>
-
-    <div align="center">
-        <b>A lightweight, fast, and modern PDF viewer built with Python and PyQt5</b>
-    </div>
-
-    <hr>
-
-    <h2>✨ Features</h2>
-
-    <ul>
-        <li>📄 Open and view PDF documents effortlessly</li>
-        <li>🌙 Built-in <b>Dark Mode</b> for comfortable reading</li>
-        <li>🖥️ Clean and minimalistic user interface</li>
-        <li>⚡ Fast and optimized performance</li>
-        <li>🔓 100% Open-source and free to use</li>
-        <li>🛠️ Over <b>1000+ lines of structured, maintainable code</b></li>
-        <li>🎨 Custom branding with a unique app icon</li>
-        <li>🧬 Future updates with more features and enhancements planned!</li>
-    </ul>
-
-    <hr>
-
-    <h2>🚀 Installation</h2>
-
-    <p>Clone the repository and run the app:</p>
-
-    <pre>
+<pre>
         <code>
 git clone https://github.com/YourUsername/OpenPDF.git
 cd OpenPDF
@@ -43,31 +13,13 @@ python App.py
         </code>
     </pre>
 
-    <hr>
 
-    <h2>🤝 Contributing</h2>
-
-    <p>We welcome contributions from developers, designers, and open-source enthusiasts!</p>
-
-    <ol>
+<ol>
         <li>Fork the repository</li>
         <li>Create your feature branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
         <li>Commit your changes (<code>git commit -m 'Add some AmazingFeature'</code>)</li>
         <li>Push to the branch (<code>git push origin feature/AmazingFeature</code>)</li>
         <li>Open a Pull Request</li>
-    </ol>
-
-    <hr>
-
-    <h2>📄 License</h2>
-
-    <p>This project is licensed under the <b>MIT License</b>.</p>
-    <p>See the <a href="LICENSE">LICENSE</a> file for more details.</p>
-
-    <hr>
-
-    <div align="center">
-        <i>Proudly crafted by Team Emogi. Together, we build the future!</i>
-    </div>
+</ol>
 </body>
 </html>
